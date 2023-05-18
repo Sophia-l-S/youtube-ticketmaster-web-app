@@ -1,0 +1,35 @@
+doctype html
+html
+  head.headder
+    title= title
+    link(rel='stylesheet', href='/styles.css')
+  body
+    //- h1= title
+    div.headtitle
+      h1(style="margin-left: 23%;") Find Your Favorite Live Attractions and Music
+      p.inst Showing search results for "#{keyword}"
+      p.inst To find more Shows and Music just type in any artist, sports team, song, or show that you are looking for!
+    form(action="/" method="get" style="margin-left: 42%;")
+      input.input(type="text" name="search" placeholder="Search")
+      button.btn(type="submit") Search
+    div.row
+      if attractions
+        div.attra
+          h2 Shows and Events
+          ul
+            each attraction in attractions
+              li.name= attraction.name
+              a.tickets(href=attraction.url target="_blank") Get tickets
+              if attraction.images.length
+                img.image(src=attraction.images[0].url, alt=attraction.name, width="245", height="215")
+      if videos
+        div.vide
+          h2 Music and Videos
+          ul
+            each video in videos
+              li= video.snippet.title
+              iframe.vid(width="460" height="215" src="https://www.youtube.com/embed/" + video.id.videoId)
+
+  footer 
+    br
+    p copyright sophia scott 2023
